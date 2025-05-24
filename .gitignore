@@ -1,0 +1,42 @@
+# Node modules
+node_modules/
+
+# Build artifacts
+dist/
+build/
+out/
+
+# Logs
+logs/
+*.log
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Environment variables
+.env
+.env.*
+
+# Electron specific
+*.asar
+*.exe
+*.app
+*.dmg
+*.deb
+*.snap
+*.rpm
+
+# Misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
