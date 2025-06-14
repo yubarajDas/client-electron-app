@@ -10,18 +10,23 @@ let tray = null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 600,
     height: 600,
+     frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
     },
-    transparent: true,
+     transparent: true,    // ✅ Transparent background
+    resizable: false,     // Optional: disable resizing
+    hasShadow: false,  
     
     show: false // Don't show the window by default
   });
 
   mainWindow.loadFile('index.html');
+    mainWindow.setMenuBarVisibility(false);
+
   mainWindow.webContents.openDevTools();
   // Hide the window when it's closed instead of quitting the app
   mainWindow.on('close', function (event) {
