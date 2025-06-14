@@ -67,6 +67,26 @@ function startClient() {
     fetchInterval = setInterval(fetchAndUpdate, 1000);
   }
 }
+const { exec } = require('child_process');
+
+function disconnectClient() {
+    // Hide the main dashboard and show the start screen
+    document.getElementById("main-dashboard").style.display = "none";
+    document.getElementById("start-screen").style.display = "flex"; // Show the start screen
+
+    // Command to stop the client.exe process
+    exec('taskkill /F /IM client.exe', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error stopping client.exe: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+    });
+}
 
 function stopClient() {
   if (clientProcess && clientProcess.pid) {
@@ -91,6 +111,7 @@ function stopClient() {
     clearInterval(fetchInterval);
     fetchInterval = null;
   }
+  disconnectClient();
 }
 
 

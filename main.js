@@ -16,6 +16,8 @@ function createWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
+    transparent: true,
+    
     show: false // Don't show the window by default
   });
 
