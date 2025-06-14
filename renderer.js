@@ -7,8 +7,8 @@ let labels = [], txThroughputData = [], rxThroughputData = [], packetCountData =
 let fetchInterval = null;
 let clientProcess = null;
 
-const jsonPath = path.resolve("C:/Users/Yubaraj/tatacomm-remoteus-Multi-Client-and-Optimizations/modularise_client/windowsbuild/bin/Debug/mpquic_live_stats.json");
-const clientExePath = "C:\\Users\\Yubaraj\\tatacomm-remoteus-Multi-Client-and-Optimizations\\modularise_client\\windowsbuild\\bin\\Debug";
+const jsonPath = path.resolve("C:/Users/Yubaraj/tatacomm-remoteus-Multi-Client-and-Optimizations/mpquic_client/windowsbuild/bin/Debug/mpquic_live_stats.json");
+const clientExePath = "C:\\Users\\Yubaraj\\tatacomm-remoteus-Multi-Client-and-Optimizations\\mpquic_client\\windowsbuild\\bin\\Debug";
 
 // Starts periodic JSON reading
 function fetchAndUpdate() {
@@ -69,10 +69,18 @@ function startClient() {
 }
 
 function stopClient() {
-  if (clientProcess) {
-    clientProcess.kill('SIGTERM');
-    console.log("Client process terminated.");
-    showToast("Client stopped");
+  if (clientProcess && clientProcess.pid) {
+    const { exec } = require('child_process');
+
+    exec(`taskkill /PID ${clientProcess.pid} /T /F`, (err, stdout, stderr) => {
+      if (err) {
+        console.error(`Failed to kill client process: ${err}`);
+        return;
+      }
+      console.log("Client process terminated.");
+      showToast("Client stopped");
+    });
+
     clientProcess = null;
   } else {
     console.log("No client process running.");
@@ -84,6 +92,7 @@ function stopClient() {
     fetchInterval = null;
   }
 }
+
 
 // Keep track of previous data to compare changes
 let previousData = null;
