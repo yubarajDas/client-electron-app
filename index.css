@@ -197,7 +197,11 @@
 
       #main-dashboard {
         display: none;
-      }
+  border: 2px solid rgb(14, 117, 235);
+        padding: 10px;
+        border-radius: 20px;
+         background: radial-gradient(circle at center, #d9ebf3 0%, #90c4dc 100%);
+              }
 
      
       #connect-button i {
@@ -238,16 +242,16 @@
         /* transition: box-shadow 0.3s ease, transform 0.3s ease; */
       }
 
-      #connect-button:hover img {
-        /* transform: scale(1.05); */
+      /* #connect-button:hover img {
+         transform: scale(1.05); 
         box-shadow: 0 0 30px rgba(34, 197, 94, 0.7);
-      }
+      } */
 
-      .pulse img {
+     /* .pulse img {
         animation: pulse 1.5s infinite;
-      }
+      } */
 
-      @keyframes pulse {
+      /* @keyframes pulse {
         0% {
           box-shadow: 0 0 0 0 rgba(128, 148, 236, 0.7);
         }
@@ -257,10 +261,10 @@
         100% {
           box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
         }
-      }
+      } */
       #start-screen {
-        border: 3px solid green;
-  background: radial-gradient(circle at center, #d2f4c5 0%, #a0dc90 100%);
+          border: 3px solid rgb(14, 117, 235);
+  background: radial-gradient(circle at center, #d9ebf3 0%, #90c4dc 100%);
   /* width: 360px;
   height: 500px; */
   border-radius: 25px;
@@ -269,7 +273,6 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   margin: 0;
 }
-
 .circle-bg {
   background: white;
   width: 110px;
@@ -289,18 +292,35 @@
 }
 
 .status-text {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   font-weight: bold;
   font-size: 18px;
-  color: green;
+ color: rgb(5, 104, 197);
 }
-
+/* 
 .pulse img {
   animation: pulse 1.5s infinite;
-}
+} */
 
 @keyframes pulse {
+  0% {
+          box-shadow: 0 0 0 0 rgba(128, 148, 236, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 20px rgba(34, 197, 94, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+        }  
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
+}
+body.dark #start-screen {
+  background: #2c2c2c;
+  color: white;
+}
+body.dark #main-dashboard {
+  background: #2c2c2c;
+  color: white;
 }
