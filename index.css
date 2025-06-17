@@ -66,7 +66,9 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         color: black;
       }
-
+      .graph{
+        margin-bottom: 50px;
+      }
       body.dark .card {
         background: #2c2c2c;
         color: white;
@@ -165,10 +167,12 @@
 
       body.dark canvas {
         background: #333;
+        color: white;
       }
 
       body.light canvas {
         background: #ffffff;
+        color: black;
       }
 
       #toast {

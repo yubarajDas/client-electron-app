@@ -1,158 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Live MPQUIC Stats Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Add Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live MPQUIC Stats Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Add Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="./index.css">
-  </head>
+</head>
 
-  <body>
-    <div id="app-wrapper">
-      
-      <!-- Start screen and dashboard go here -->
-     <!-- Start screen styled like ExpressVPN -->
-<div id="start-screen">
-  <div class="circle-bg">
-    <button id="connect-button" class="pulse">
-      <img src="./switch-off.png" alt="Start" width="80" height="80" />
-    </button>
-  </div>
-  <p class="status-text">Welcome to MPQUIC Live Stats</p>
-</div>
+<body>
+  <div id="app-wrapper">
 
+    <!-- Start screen and dashboard go here -->
+    <!-- Start screen styled like ExpressVPN -->
+    <div id="start-screen">
+      <div class="circle-bg">
+        <button id="connect-button" class="pulse">
+          <img src="./switch-off.png" alt="Start" width="80" height="80" />
+        </button>
+      </div>
+      <p class="status-text">Welcome to MPQUIC Live Stats</p>
+    </div>
 
-      <!-- Dashboard -->
-      <div id="main-dashboard">
-        <h1>Live MPQUIC Statistics</h1>
+    <!-- Dashboard -->
+    <div id="main-dashboard">
+      <h1>Live MPQUIC Statistics</h1>
 
-        <div class="controls">
-          <!-- <button onclick="exportJSON()">Export JSON</button> -->
-          <button id="theme-toggle" onclick="toggleTheme()">
-            <i class="fas fa-sun sun-icon"></i>
-            <i class="fas fa-moon moon-icon"></i>
-          </button>
-          <button class="stop" onclick="stopClient()">Stop Monitoring</button>
-           <!-- <button id="disconnect-button" onclick="disconnectClient()">Disconnect</button> -->
-        </div>
- <div class="card session">
+      <div class="controls">
+        <button id="theme-toggle" onclick="toggleTheme()">
+          <i class="fas fa-sun sun-icon"></i>
+          <i class="fas fa-moon moon-icon"></i>
+        </button>
+        <button class="stop" onclick="stopClient()">Stop Monitoring</button>
+      </div>
+
+      <div class="card session">
         <p><strong>Session Info:-</strong></p>
-        <p><strong>TS:</strong> <span id="timestamp">--</span></p>
-        <p><strong>Session Duration:</strong> <span id="session-duration">--</span></p>
+        <p><strong>Timestamp:</strong> <span id="timestamp">--</span></p>
         <p><strong>Server IP:</strong> <span id="server-ip">--</span></p>
         <p><strong>Server Port:</strong> <span id="server-port">--</span></p>
       </div>
-        <div class="dashboard">
-         
 
-          <!-- <div class="card">
-            <h3>Reliability</h3>
-            <p>
-              <strong>Packet Loss Count:</strong>
-              <span id="packet-loss-count">--</span>
-            </p>
-            <p>
-              <strong>Packet Loss Rate:</strong>
-              <span id="packet-loss-rate">--</span>
-            </p>
-            <p>
-              <strong>Retransmissions:</strong>
-              <span id="retransmissions">--</span>
-            </p>
-          </div> -->
-
-          <div class="card">
-            <h3>Transmit</h3>
-            <p>
-              <strong>Tx_pkts :</strong>
-              <span id="tx-windivert">--</span>
-            </p>
-            <p>
-              <!-- <strong>MPQUIC Packets:</strong> <span id="tx-mpquic">--</span> -->
-            </p>
-            <p><strong>Upload_bytes:</strong> <span id="tx-bytes">--</span></p>
-            <p>
-              <strong>Tx_throuput:</strong> <span id="tx-throughput">--</span>
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Receive</h3>
-            <p>
-              <strong>Rx_pkts :</strong>
-              <span id="rx-windivert">--</span>
-            </p>
-            <p>
-              <!-- <strong>MPQUIC Packets:</strong> <span id="rx-mpquic">--</span> -->
-            </p>
-            <p><strong>Download_bytes:</strong> <span id="rx-bytes">--</span></p>
-            <p>
-              <strong>Rx_throuput:</strong> <span id="rx-throughput">--</span>
-            </p>
-          </div>
+      <div class="dashboard">
+        <div class="card">
+          <h3>Transmit Statistics</h3>
+          <p>
+            <strong>TX Packets:</strong>
+            <span id="tx-packets">--</span>
+          </p>
+          <p>
+            <strong>TX Current:</strong>
+            <span id="tx-current">--</span>
+          </p>
+          <p>
+            <strong>Upload Bytes:</strong>
+            <span id="upload-bytes">--</span>
+          </p>
         </div>
 
         <div class="card">
-          <h3>Throughput Over Time</h3>
-          <canvas id="throughputChart" height="100"></canvas>
+          <h3>Receive Statistics</h3>
+          <p>
+            <strong>RX Packets:</strong>
+            <span id="rx-packets">--</span>
+          </p>
+          <p>
+            <strong>RX Current:</strong>
+            <span id="rx-current">--</span>
+          </p>
+          <p>
+            <strong>Download Bytes:</strong>
+            <span id="download-bytes">--</span>
+          </p>
         </div>
 
-        <!-- <div class="card">
-          <h3>Total Packet Count Over Time</h3>
-          <canvas id="packetChart" height="100"></canvas>
+        <div class="card">
+          <h3>Loss Statistics</h3>
+          <p>
+            <strong>Packet Loss:</strong>
+            <span id="packet-loss">--</span>
+          </p>
+          <!-- <p>
+            <strong>Loss Rate:</strong>
+            <span id="loss-rate">--</span>
+          </p> -->
         </div>
+      </div>
+
+      <div class="card graph">
+        <h3>Current Values Over Time</h3>
+        <canvas id="throughputChart" height="100"></canvas>
+      </div>
+
+      <!-- <div class="card">
+        <h3>Total Packet Count Over Time</h3>
+        <canvas id="packetChart" height="100"></canvas>
       </div> -->
-
-      <div id="toast">Updated!</div>
     </div>
 
-    <!-- Include the renderer.js script directly -->
-    <script src="./renderer.js"></script>
+    <div id="toast">Updated!</div>
+  </div>
 
-    <script>
-      function disconnectClient() {
-        document.getElementById("main-dashboard").style.display = "none";
-        document.getElementById("start-screen").style.display = "flex"; // Show the start screen
+  <!-- Include the renderer.js script directly -->
+  <script src="./renderer.js"></script>
+
+  <script>
+    function disconnectClient() {
+      document.getElementById("main-dashboard").style.display = "none";
+      document.getElementById("start-screen").style.display = "flex"; // Show the start screen
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+
+      if (body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
       }
+    }
 
-      function toggleTheme() {
-        const body = document.body;
-        
-        if (body.classList.contains('dark')) {
-          body.classList.remove('dark');
-          body.classList.add('light');
-          localStorage.setItem('theme', 'light');
-        } else {
-          body.classList.remove('light');
-          body.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        }
-      }
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.body.classList.add(savedTheme);
 
-      // Load saved theme on page load
-      document.addEventListener('DOMContentLoaded', function() {
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.body.classList.add(savedTheme);
+      document
+        .getElementById("connect-button")
+        .addEventListener("click", function () {
+          document.getElementById("start-screen").style.display = "none";
+          document.getElementById("main-dashboard").style.display = "block";
 
-        document
-          .getElementById("connect-button")
-          .addEventListener("click", function () {
-            document.getElementById("start-screen").style.display = "none";
-            document.getElementById("main-dashboard").style.display = "block";
+          if (typeof startClient === "function") {
+            startClient();
+          } else {
+            console.error("startClient function not found");
+          }
+        });
+    });
+  </script>
+</body>
 
-            if (typeof startClient === "function") {
-              startClient();
-            } else {
-              console.error("startClient function not found");
-            }
-          });
-      });
-    </script>
-  </body>
 </html>
